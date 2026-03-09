@@ -1,0 +1,28 @@
+# Nuxt
+.nuxt
+.output
+.data
+.nitro
+.cache
+
+# Node
+node_modules
+
+# Umgebungsvariablen (NIEMALS committen!)
+.env
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Lighthouse CI
+.lighthouseci
