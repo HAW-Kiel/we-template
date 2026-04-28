@@ -17,7 +17,7 @@
     <p>
       Verantwortlich für den Inhalt:<br>
       Prof. Dr. Christian Krauss<br>
-      Fachhochschule Kiel<br>
+      HAW Kiel<br>
       Sokratesplatz 2, 24149 Kiel
     </p>
 
