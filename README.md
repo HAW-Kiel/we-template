@@ -1,8 +1,26 @@
 # Sprechstunden-Buchungssystem
 
-Web Engineering SoSe 2026 · Prof. Dr. Christian Krauss · HAW Kiel
+Web Engineering · Prof. Dr. Christian Krauss · HAW Kiel
 
-## Schnellstart
+Dies ist die Vorlage für Ihr Semesterprojekt. Sie ist auf **Nuxt 4** aufgesetzt und bringt einige Beispieldateien mit, an denen Sie sich orientieren können.
+
+---
+
+## 1. Voraussetzungen
+
+Vor dem ersten Start brauchen Sie:
+
+- **Node.js 20 LTS** oder neuer ([nodejs.org](https://nodejs.org/))
+  Prüfen mit `node -v` — es sollte `v20.x.x` oder höher angezeigt werden.
+- **VS Code** ([code.visualstudio.com](https://code.visualstudio.com/))
+  Empfohlene Extensions:
+  - **Vue - Official** (Vue-Sprachsupport, Hervorhebung, Auto-Vervollständigung)
+  - **Vue VSCode Snippets** (z. B. `vbase-3-setup` erzeugt ein Page-Grundgerüst)
+- **Git** für die Versionsverwaltung.
+
+---
+
+## 2. Schnellstart
 
 ```bash
 # 1. Abhängigkeiten installieren
@@ -11,61 +29,146 @@ npm install
 # 2. Umgebungsvariablen einrichten
 cp .env.example .env
 # → .env bearbeiten: SUPABASE_URL und SUPABASE_ANON_KEY eintragen
+#   (erst nötig, wenn Sie Supabase einbinden — am Anfang können die Werte leer bleiben)
 
 # 3. Entwicklungsserver starten
 npm run dev
 ```
 
-Die Anwendung läuft dann auf `http://localhost:3000`.
+Öffnen Sie dann [http://localhost:3000](http://localhost:3000). Sie sehen die Startseite mit Menübar, einer API-Demo und einem Impressum.
 
-## Befehle
+> **Tipp:** Tritt beim Start ein Fehler auf, hilft fast immer ein erneutes `npm install`.
 
-| Befehl | Beschreibung |
-|---|---|
-| `npm run dev` | Entwicklungsserver starten |
-| `npm test` | Tests ausführen (einmalig) |
-| `npm run test:watch` | Tests im Watch-Modus (bei jeder Änderung) |
-| `npm run lint` | ESLint prüfen |
-| `npm run lint:fix` | ESLint-Fehler automatisch beheben |
-| `npm run generate` | Statische Seiten generieren (für Abgabe) |
+---
 
-## Projektstruktur (Nuxt 4)
+## 3. Wie ist das Projekt aufgebaut?
 
 ```
-├── .github/workflows/ci.yml   ← CI-Pipeline (ESLint, Tests, Lighthouse)
-├── app/                        ← Ihr Anwendungscode (Nuxt 4)
-│   ├── pages/                  ← Seiten (File-Based Routing)
-│   │   └── index.vue           ← Startseite (TODO)
-│   ├── utils/
-│   │   └── booking.js          ← Buchungslogik (TODO: implementieren)
-│   └── app.vue                 ← Root-Komponente
-├── server/api/                 ← Server-API-Routen (optional)
-├── shared/                     ← Code, der in App und Server genutzt wird
+nuxt-starter-template/
+├── app/                          ← Ihr Anwendungscode
+│   ├── app.vue                   Root-Komponente (lädt die jeweilige Page)
+│   ├── error.vue                 Fehlerseite (z. B. 404)
+│   ├── components/
+│   │   └── PageHeader.vue        Wiederverwendbare Komponente (Beispiel)
+│   ├── layouts/
+│   │   └── default.vue           Menübar + Footer für alle Seiten
+│   ├── pages/                    Jede Datei = eine URL (File-based Routing)
+│   │   ├── index.vue             →  /
+│   │   ├── impressum.vue         →  /impressum
+│   │   └── demo.vue              →  /demo  (Fake-API-Demo)
+│   └── utils/
+│       └── booking.js            Hilfsfunktionen (automatisch global verfügbar)
+├── server/api/                   Eigene Server-Routen (optional)
 ├── tests/
-│   └── booking.test.js         ← Tests (laufen mit: npm test)
-├── nuxt.config.js              ← Nuxt-Konfiguration
-├── vitest.config.js            ← Test-Konfiguration
-├── lighthouserc.json           ← Lighthouse CI-Schwellenwerte
-└── .env.example                ← Vorlage für Umgebungsvariablen
+│   └── booking.test.js           Ein einfaches Test-Beispiel
+├── .env.example                  Vorlage für Umgebungsvariablen
+├── nuxt.config.js                Nuxt-Konfiguration
+└── package.json                  Abhängigkeiten und Skripte
 ```
 
-**Hinweis:** Nuxt 4 verwendet die `app/`-Verzeichnisstruktur. Seiten, Komponenten, Composables und Utilities gehören in `app/`. Server-Code bleibt in `server/`.
+### Wichtig: Nuxt 3 → Nuxt 4
 
-## Erste Schritte
+Die Vorlesung ist noch in Nuxt 3. Da arbeite ich gerade dran... **Der einzige spürbare Unterschied:**
+In Nuxt 4 liegen `pages/`, `components/`, `layouts/`, `utils/` und `app.vue` im Ordner `app/` — in der Vorlesung lagen sie im Root.
 
-1. **Tests zum Laufen bringen:** Implementieren Sie die Funktionen in `app/utils/booking.js`, bis `npm test` grün ist.
-2. **Supabase einrichten:** Erstellen Sie ein Projekt auf [supabase.com](https://supabase.com), legen Sie die Tabellen an, konfigurieren Sie RLS-Policies.
-3. **Seiten bauen:** Erstellen Sie die Seiten unter `app/pages/` — Nuxt generiert das Routing automatisch.
-4. **Regelmäßig committen:** Ihre Git-History ist Teil der Bewertung.
+Alles andere (NuxtLink, useFetch, defineProps, definePageMeta, createError …) funktioniert genau wie in der Vorlesung. Wir bleiben außerdem bei **JavaScript** — kein TypeScript, kein `lang="ts"`.
 
-## CI-Pipeline
+---
+
+## 4. Nuxt-Grundlagen — wo finde ich was?
+
+| Aufgabe | Wo? | Vorlesung |
+|---|---|---|
+| Neue Seite anlegen | Datei in `app/pages/` anlegen, z. B. `kontakt.vue` → `/kontakt` | S. 397 |
+| Dynamische Route (mit Parameter) | `app/pages/produkte/[id].vue` → `/produkte/abc` | S. 402 |
+| Navigation zwischen Seiten | `<NuxtLink to="/impressum">Impressum</NuxtLink>` | S. 405 |
+| Gemeinsames Layout | `app/layouts/default.vue` mit `<slot />` | S. 407 |
+| Wiederverwendbare Komponente | Datei in `app/components/`, z. B. `Card.vue` → `<Card />` | S. 425 |
+| Daten von API holen | `const { data } = await useFetch('https://…')` | S. 421 |
+| Fehlerseite (404) | `app/error.vue` | S. 434 |
+
+> Schauen Sie sich die Beispieldateien im Projekt an — jede hat oben einen Kommentar, der das Pattern und die Vorlesungsseite nennt.
+
+---
+
+## 5. Was ist schon da?
+
+- **Startseite** (`/`) — zeigt die `PageHeader`-Komponente und Links zu den anderen Seiten
+- **Impressum** (`/impressum`) — Beispiel für eine zweite Seite
+- **API-Demo** (`/demo`) — lädt Produkte von [fakestoreapi.com](https://fakestoreapi.com/) mit `useFetch` und zeigt sie als Karten an. Das ist das Pattern, das Sie später für Ihre eigene API brauchen.
+- **404-Seite** — beim Aufruf einer nicht existierenden URL erscheint die `error.vue` mit Link zurück zur Startseite
+
+Sie können die `demo.vue` einfach löschen oder als Vorlage für eigene Seiten nehmen.
+
+---
+
+## 6. Die Beispiel-Test-Datei
+
+In `tests/booking.test.js` finden Sie einen kleinen Test für die Funktion `isValidMatrikel`. Damit sehen Sie, wie ein Test aussieht. Mehr brauchen Sie nicht — Sie können später eigene Tests ergänzen, wenn Sie eigene Funktionen schreiben.
+
+```bash
+npm test            # Tests einmalig ausführen
+npm run test:watch  # Tests bei jeder Änderung neu ausführen
+```
+
+---
+
+## 7. Befehle im Überblick
+
+| Befehl | Was passiert |
+|---|---|
+| `npm run dev` | Entwicklungsserver starten ([http://localhost:3000](http://localhost:3000)) |
+| `npm test` | Tests einmal ausführen |
+| `npm run lint` | Code-Qualität prüfen (ESLint) |
+| `npm run lint:fix` | Auto-fixbare Lint-Fehler beheben |
+| `npm run generate` | Statische Seiten erzeugen (für die Abgabe) |
+
+---
+
+## 8. Optional: Tailwind CSS hinzufügen
+
+Die Vorlesung nutzt Tailwind ab S. 411. Wenn Sie Tailwind verwenden möchten:
+
+```bash
+npm install --save-dev @nuxtjs/tailwindcss
+```
+
+Dann in `nuxt.config.js` das Modul ergänzen:
+
+```js
+modules: [
+  '@nuxt/eslint',
+  '@nuxtjs/tailwindcss'
+]
+```
+
+Danach können Sie Tailwind-Klassen wie `class="flex gap-4 p-4"` direkt in Ihren Templates verwenden.
+
+---
+
+## 9. Empfohlene Schritte
+
+1. **Server starten** und durch die Beispielseiten klicken — verstehen Sie, wie die Dateien zur URL passen.
+2. **Eine eigene Seite anlegen**, z. B. `app/pages/kontakt.vue`. Im Browser prüfen: `/kontakt`.
+3. **Supabase einrichten** ([supabase.com](https://supabase.com)), Tabellen anlegen, RLS-Policies setzen, Werte in `.env` eintragen.
+4. **Eigene Logik** in `app/utils/` oder eigene Components in `app/components/` schreiben.
+5. **Regelmäßig committen** — Ihre Git-History gehört zur Bewertung.
+
+---
+
+## 10. CI-Pipeline (GitHub Actions)
 
 Bei jedem Push auf `main` läuft automatisch:
 
-- **ESLint** — Code-Qualität prüfen
-- **Vitest** — Tests ausführen
-- **Lighthouse** — Performance und Accessibility messen
+- **ESLint** — prüft die Code-Qualität
+- **Vitest** — führt Tests aus
+- **Lighthouse** — misst Performance und Accessibility
 
-Ergebnisse sehen Sie als ✅ oder ❌ neben Ihrem Commit auf GitHub.
+Sie sehen das Ergebnis als ✅ oder ❌ neben Ihrem Commit auf GitHub.
 
-Damit Lighthouse in GitHub Actions funktioniert, müssen Sie Ihre Supabase-Credentials als **Repository Secrets** hinterlegen: Settings → Secrets and variables → Actions → `SUPABASE_URL` und `SUPABASE_ANON_KEY`.
+Damit Lighthouse auf GitHub Actions funktioniert, hinterlegen Sie Ihre Supabase-Werte als **Repository Secrets**:
+Settings → Secrets and variables → Actions → `SUPABASE_URL`, `SUPABASE_ANON_KEY`.
+
+---
+
+Bei Fragen: Foliensatz **Web Engineering_07_NUXT.pdf** ab Folie 377.
