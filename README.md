@@ -59,6 +59,10 @@ nuxt-starter-template/
 │   └── utils/
 │       └── booking.js            Hilfsfunktionen (automatisch global verfügbar)
 ├── server/api/                   Eigene Server-Routen (optional)
+├── supabase/                     ← Datenbank-Export für die Abgabe
+│   ├── export_supabase.md        Anleitung zum Export
+│   ├── export_supabase.sql       Export-Skript (im Supabase SQL Editor ausführen)
+│   └── export.sql                Ihr Export — legen Sie diese Datei selbst an
 ├── tests/
 │   └── booking.test.js           Ein einfaches Test-Beispiel
 ├── .env.example                  Vorlage für Umgebungsvariablen
@@ -153,6 +157,7 @@ Danach können Sie Tailwind-Klassen wie `class="flex gap-4 p-4"` direkt in Ihren
 3. **Supabase einrichten** ([supabase.com](https://supabase.com)), Tabellen anlegen, RLS-Policies setzen, Werte in `.env` eintragen.
 4. **Eigene Logik** in `app/utils/` oder eigene Components in `app/components/` schreiben.
 5. **Regelmäßig committen** — Ihre Git-History gehört zur Bewertung.
+6. **Datenbank exportieren**, wenn Ihr System fertig ist — siehe Abschnitt 11.
 
 ---
 
@@ -168,6 +173,17 @@ Sie sehen das Ergebnis als ✅ oder ❌ neben Ihrem Commit auf GitHub.
 
 Damit Lighthouse auf GitHub Actions funktioniert, hinterlegen Sie Ihre Supabase-Werte als **Repository Secrets**:
 Settings → Secrets and variables → Actions → `SUPABASE_URL`, `SUPABASE_ANON_KEY`.
+
+---
+
+## 11. Datenbank-Export (Pflichtbestandteil der Abgabe)
+
+Ein Dump Ihrer Supabase-Datenbank gehört zur Abgabe. Alles Nötige liegt im Ordner `supabase/`:
+
+- [`supabase/export_supabase.md`](supabase/export_supabase.md) — Schritt-für-Schritt-Anleitung
+- [`supabase/export_supabase.sql`](supabase/export_supabase.sql) — das Export-Skript für den SQL Editor im Supabase-Dashboard
+
+Kurz: Skript im SQL Editor ausführen, Inhalt der Ergebniszelle `export_sql` kopieren und als `supabase/export.sql` committen. Erstellen Sie den Export erst, wenn Ihr System fertig ist.
 
 ---
 
