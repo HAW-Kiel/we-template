@@ -8,4 +8,4 @@ Ein Dump Ihrer Supabase-Datenbank ist Teil der Abgabe. Er wird direkt im Supabas
 
 Der Export enthält Ihr Datenbankschema (Tabellen, Constraints, Trigger, Funktionen, RLS-Policies) sowie die aktuellen Tabelleninhalte. Er muss mindestens die angelegten Zeitslots und einige Testbuchungen enthalten. Tabellen ohne Inhalt werden mit `-- keine Daten` markiert. Erstellen Sie den Export erst, wenn Ihr System fertig ist – er soll dem Stand entsprechen, den Sie abgeben.
 
-> **Hinweis:** Am Export ist unmittelbar erkennbar, ob Row Level Security aktiviert ist, welche Policies existieren und ob der Doppelbuchungsschutz auf Datenbankebene umgesetzt wurde. Diese Punkte fließen mit 35 % in die Bewertung ein.
+> **Hinweis:** Am Export ist unmittelbar erkennbar, ob Row Level Security aktiviert ist, welche Policies existieren und ob der Doppelbuchungsschutz auf Datenbankebene umgesetzt wurde. 
